@@ -53,20 +53,20 @@ export default function App() {
 
     return (
         <>
-        <StatusBar style="light" />
-        <LinearGradient colors={["#ecd696", "#df7fb8"]} style={styles.rootElement}>
-            <ImageBackground
-                source={require("./assets/images/dice.jpg")}
-                style={styles.rootElement}
-                resizeMode="cover"
-                imageStyle={styles.backgroundImage}
-            >
-                <StatusBar />
-                <SafeAreaView style={styles.rootElement}>
-                    {screen}
-                </SafeAreaView>
-            </ImageBackground>
-        </LinearGradient>
+            <StatusBar style="light" />
+            <LinearGradient colors={["#ecd696", "#df7fb8"]} style={styles.rootElement}>
+                <ImageBackground
+                    source={require("./assets/images/dice.jpg")}
+                    style={styles.rootElement}
+                    resizeMode="cover"
+                    imageStyle={styles.backgroundImage}
+                >
+                    <StatusBar />
+                    <SafeAreaView style={styles.rootElement}>
+                        {screen}
+                    </SafeAreaView>
+                </ImageBackground>
+            </LinearGradient>
         </>
     );
 }
