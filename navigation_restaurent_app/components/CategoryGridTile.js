@@ -1,8 +1,8 @@
-import {View,Pressable,Text,StyleSheet} from "react-native"
+import { Pressable, StyleSheet, Text, View } from "react-native";
 function CategoryGridTile({title,color}){
     return (
         <View style={styles.gridItem}>
-            <Pressable style={styles.button}>
+            <Pressable style={styles.button} android_ripple={{color : '#ccc'}}>
                 <View style={styles.innerContainer}>
                     <Text style={styles.title}>{title}</Text>
                 </View>
