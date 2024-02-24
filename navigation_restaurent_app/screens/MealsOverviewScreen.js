@@ -6,13 +6,13 @@ function MealsOverviewScreen({ route, navigation }) {
   const catId = route.params.categoryId;
 
   useLayoutEffect(() => {
-    const categoryTitle = CATEGORIES.find((Item) => {   
-      return Item.id===catId;
+    const categoryTitle = CATEGORIES.find((Item) => {
+      return Item.id === catId;
     }).title;
     navigation.setOptions({
       title: categoryTitle,
     });
-  }, [catId,navigation]);
+  }, [catId, navigation]);
 
   const displayedMeals = MEALS.filter((mealItem) => {
     return mealItem.categoryIds.indexOf(catId) >= 0;
@@ -21,6 +21,7 @@ function MealsOverviewScreen({ route, navigation }) {
   function renderMealItem(itemData) {
     const item = itemData.item;
     const mealItemProps = {
+      id: item.id,
       title: item.title,
       duration: item.duration,
       complexity: item.complexity,
