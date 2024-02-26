@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Expence_Tracker_app",
-    "slug": "Expence_Tracker_app",
+    "name": "Expense_Tracker_App_Practice",
+    "slug": "Expense_Tracker_App_Practice",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
