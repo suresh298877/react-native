@@ -2,6 +2,7 @@ import { useContext, useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import Button from "../UI/Button";
 import IconButton from "../UI/IconButton";
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 import { GlobalStyles } from "../constants/styles";
 import { ExpensesContext } from "../store/expenses-context";
 function ManageExpense({ route, navigation }) {
@@ -46,6 +47,7 @@ function ManageExpense({ route, navigation }) {
     }
     return (
         <View style={styles.container}>
+            <ExpenseForm />
             <View style={styles.buttons}>
                 <Button style={styles.button} mode="flat" onPress={cancelHandler}>
                     Cancel

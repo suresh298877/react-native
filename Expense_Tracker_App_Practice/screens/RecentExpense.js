@@ -1,6 +1,5 @@
-import {Text} from "react-native";
-import ExpensesOutput from "../components/Expenses Output/ExpensesOutput";
 import { useContext } from "react";
+import ExpensesOutput from "../components/Expenses Output/ExpensesOutput";
 import { ExpensesContext } from "../store/expenses-context";
 import { getDateMinusDays } from "../util/date";
 function RecentExpenses(){
@@ -12,7 +11,7 @@ function RecentExpenses(){
         return expense.date>date7DaysAgo;
     });
 
-    return <ExpensesOutput expenses={recentExpenses} expensesPeriod="Last 7 days" />
+    return <ExpensesOutput expenses={recentExpenses} expensesPeriod="Last 7 days" fallbackText={"No Expenses Registered for the last 7 days"} />
 }
 
 export default RecentExpenses;
