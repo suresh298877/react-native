@@ -18,7 +18,6 @@ function ManageExpense({ route, navigation }) {
 
     function deleteExpenseHandler() {
         expenseCtx.deleteExpense(editedExpenseId);
-        console.log(editedExpenseId);
         navigation.goBack();
     }
 
