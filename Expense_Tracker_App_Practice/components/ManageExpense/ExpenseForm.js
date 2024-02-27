@@ -1,15 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, Text, View } from "react-native";
 import Input from "./Input";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../../UI/Button";
+import { ExpensesContext } from "../../store/expenses-context";
+import { getFormattedDate } from "../../util/date";
 
-function ExpenseForm({onCancel,submitButtonLabel}) {
+function ExpenseForm({onCancel,submitButtonLabel,onSubmit,defaultValues}) {
     const [inputValues,setInputValues]=useState({
-        amount : "",
-        date : "",
-        description : '',
+        amount : defaultValues?defaultValues.amount.toString(): "",
+        date : defaultValues? getFormattedDate(defaultValues.date): "",
+        description : defaultValues?defaultValues.description: "",
     });
-
     function inputChangeHandler(inputIdentifier,enteredText) {
         setInputValues((curInputValues)=>{
             return {
@@ -17,6 +18,25 @@ function ExpenseForm({onCancel,submitButtonLabel}) {
                 [inputIdentifier] : enteredText,
             }
         })
+    }
+
+    function submitHandler(){
+        const expenseData={
+            amount : +inputValues.amount,
+            date : new Date(inputValues.date),
+            description : inputValues.description,
+        };
+
+        const amountIsvalid=!isNaN(expenseData.amount) && expenseData.amount>0;
+        const dateIsValid=expenseData.date.toString()!=='Invalid Date';
+        const descriptionIsvalid=expenseData.description.trim().length>0;
+
+        if(!amountIsvalid || !dateIsValid || !descriptionIsvalid){
+            Alert.alert("Invalid input","Please check your values");
+            return;
+        }
+
+        onSubmit(expenseData);
     }
     return <View style={styles.form}>
         <Text style={styles.title}>Your Expense</Text>
@@ -52,7 +72,7 @@ function ExpenseForm({onCancel,submitButtonLabel}) {
                 <Button style={styles.button} mode="flat" onPress={onCancel}>
                     Cancel
                 </Button>
-                <Button style={styles.button} >{submitButtonLabel}</Button>
+                <Button style={styles.button} onPress={submitHandler}>{submitButtonLabel}</Button>
             </View>
     </View>
 }

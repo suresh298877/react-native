@@ -6,10 +6,14 @@ import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 import { GlobalStyles } from "../constants/styles";
 import { ExpensesContext } from "../store/expenses-context";
 function ManageExpense({ route, navigation }) {
-    const expenseCtx=useContext(ExpensesContext);
+    const expenseCtx = useContext(ExpensesContext);
 
     const editedExpenseId = route.params?.expenseId;
     const isEditing = !!editedExpenseId;
+
+    const selectedExpense=expenseCtx.expenses.find(
+        (expense)=>expense.id===editedExpenseId
+    );
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -22,36 +26,29 @@ function ManageExpense({ route, navigation }) {
         navigation.goBack();
     }
 
-    function cancelHandler(){
+    function cancelHandler() {
         navigation.goBack();
     }
 
-    function confirmHandler(){
-        if (isEditing){
+    function confirmHandler(expenseData) {
+        if (isEditing) {
             expenseCtx.updateExpense(
-                editedExpenseId,
-                {
-                    description : 'Test!!!!!!',
-                    amount : 29.999,
-                    date : new Date('2022-05-20'),
-                }
+                editedExpenseId, expenseData
             );
-        }else{
-            expenseCtx.addExpense({
-                description : 'Test',
-                amount : 19.999,
-                date : new Date('202205-19'),
-            })
+        } else {
+            expenseCtx.addExpense(expenseData);
         }
         navigation.goBack();
     }
     return (
         <View style={styles.container}>
             <ExpenseForm
-            submitButtonLabel={isEditing ? 'Update' : 'Add'}
-            onCancel = {cancelHandler}
-             />
-            
+                submitButtonLabel={isEditing ? 'Update' : 'Add'}
+                onCancel={cancelHandler}
+                onSubmit={confirmHandler}
+                defaultValues={selectedExpense}
+            />
+
             {isEditing && (
                 <View style={styles.deleteContainer}>
                     <IconButton
